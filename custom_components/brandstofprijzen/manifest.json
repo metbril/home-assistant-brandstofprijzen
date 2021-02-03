@@ -1,0 +1,9 @@
+{
+    "domain": "brandstofprijzen",
+    "name": "Brandstofprijzen",
+    "documentation": "https://github.com/metbril/home-assistant-brandstofprijzen",
+    "issue_tracker": "https://github.com/metbril/home-assistant-brandstofprijzen/issues",
+    "dependencies": [],
+    "codeowners": ["@metbril"],
+    "requirements": ["beautifulsoup4==4.9.3"]
+  }
