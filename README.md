@@ -8,6 +8,13 @@ TODO
 
 ## Configuration
 
+Minimal configuration:
+
+```yaml
+sensor:
+  - platform: brandstofprijzen
+```
+
 Default configuration:
 
 ```yaml
