@@ -4,7 +4,17 @@ Home Assistant component for fuel prices from [United Consumers](https://www.uni
 
 ## Installation
 
-TODO
+## HACS (Recommended)
+
+HACS installation is not yet available, but it's on my TODO list.
+
+## Manual
+
+1. Copy directory `brandstofprijzen` to your `<config dir>/custom_components` directory.
+2. Configure Home Assistant.
+3. Restart Home Assistant.
+
+Please note that you need to also manually update the component with newer versions in the future.
 
 ## Configuration
 
