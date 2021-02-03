@@ -1,6 +1,6 @@
 # United Consumers Brandstofprijzen for Home Assistant
 
-Home Assistant component for fuel prices from United Consumers
+Home Assistant component for fuel prices from [United Consumers](https://www.unitedconsumers.com/brandstofprijzen/).
 
 ## Installation
 
