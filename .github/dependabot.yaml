@@ -9,7 +9,7 @@ updates:
       interval: daily
 
   # Enable version updates for Python
-  - package-ecosystem: "python"
+  - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "daily"
