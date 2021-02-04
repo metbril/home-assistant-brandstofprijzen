@@ -1,6 +1,7 @@
 {
     "domain": "brandstofprijzen",
     "name": "Brandstofprijzen",
+    "version": "0.1.0",
     "documentation": "https://github.com/metbril/home-assistant-brandstofprijzen",
     "issue_tracker": "https://github.com/metbril/home-assistant-brandstofprijzen/issues",
     "dependencies": [],
