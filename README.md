@@ -2,6 +2,8 @@
 
 Home Assistant component for fuel prices from [United Consumers](https://www.unitedconsumers.com/brandstofprijzen/).
 
+![](./assets/logo.png)
+
 ## Installation
 
 ## HACS (Recommended)
@@ -50,3 +52,7 @@ TODO
 All notable changes to this project will be documented in the [changelog](./CHANGELOG.md).
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## Legal notice
+
+All product names, trademarks and registered trademarks in (the images in) this repository, are property of their respective owners. All images in this repository are used by the project for identification purposes only.
