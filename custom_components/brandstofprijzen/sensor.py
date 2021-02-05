@@ -14,6 +14,7 @@ from homeassistant.const import (
     CONF_NAME,
     CONF_MONITORED_VARIABLES,
     CONF_SCAN_INTERVAL,
+    CONF_UNIT_OF_MEASUREMENT,
 )
 from homeassistant.helpers.entity import Entity
 from homeassistant.util import Throttle
