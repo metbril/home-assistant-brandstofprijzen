@@ -23,7 +23,9 @@ REQUIREMENTS = ["beautifulsoup4==4.9.3"]
 
 _LOGGER = logging.getLogger(__name__)
 _RESOURCE = "https://www.unitedconsumers.com/brandstofprijzen/"
-_USERAGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"
+
+# List: https://techblog.willshouse.com/2012/01/03/most-common-user-agents/
+_USERAGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
 
 ATTRIBUTION = "Data provided by United Consumers"
 DEFAULT_ICON = "mdi:gas-station"
