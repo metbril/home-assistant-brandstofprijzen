@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Add missing prices. All fuels are available now.
+
 ### Fixed
 - Update user agent
 ## [0.1.2] - 2021-02-05

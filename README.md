@@ -50,6 +50,11 @@ sensor:
       - euro95
       - diesel
       - lpg
+      - super
+      - super_mlv
+      - premium_benzines
+      - premium_diesels
+      - blueone95
     icon: mdi:gas-station
     unit_of_measurement: €/L
     prefix: Adviesprijs

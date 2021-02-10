@@ -37,7 +37,17 @@ DEFAULT_SCAN_INTERVAL = timedelta(hours=1)
 # Prevent fetching the page again for each sensor
 MIN_TIME_BETWEEN_UPDATES = timedelta(minutes=1)
 
-SENSOR_TYPES = {"euro95": ["Euro95"], "diesel": ["Diesel"], "lpg": ["LPG"]}
+# All fuel types on the page, in page order.
+SENSOR_TYPES = {
+    "euro95": ["Euro95"],
+    "diesel": ["Diesel"],
+    "lpg": ["LPG"],
+    "super": ["Super"],
+    "super_mlv": ["Super MLV"],
+    "premium_benzines": ["Premium benzines"],
+    "premium_diesels": ["Premium diesels"],
+    "blueone95": ["BlueOne95"],
+}
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
@@ -113,28 +123,14 @@ class BrandstofprijzenSensor(Entity):
     def update(self):
         """Update current date."""
         self.rest.update()
-        if self.type == "euro95":
-            try:
-                self._state = float(self.rest.data[0])
-            except TypeError:
-                self._state = None
-                _LOGGER.error("Unable to update %s", self.type)
-        elif self.type == "diesel":
-            try:
-                self._state = float(self.rest.data[1])
-            except TypeError:
-                self._state = None
-                _LOGGER.error("Unable to update %s", self.type)
-        elif self.type == "lpg":
-            try:
-                self._state = float(self.rest.data[2])
-            except TypeError:
-                self._state = None
-                _LOGGER.error("Unable to update %s", self.type)
-        else:
-            self._state = None
-            _LOGGER.warn("Unknown sensor type %s", self.type)
-        _LOGGER.debug("Sensor %s updated.", self._name)
+        for idx, stype in enumerate(SENSOR_TYPES):
+            if self.type == stype:
+                try:
+                    self._state = self.rest.data[idx]
+                    _LOGGER.debug("Updated sensor %s to %.3f", self.type, self._state)
+                except TypeError:
+                    self._state = None
+                    _LOGGER.error("Unable to update %s", self.type)
 
 
 class BrandstofprijzenData(object):
@@ -158,34 +154,19 @@ class BrandstofprijzenData(object):
             req_soup = soup.find("div", class_="table")
             soup_info = req_soup.find_all("div", class_="table-row")
             data = []
-            # Euro95
-            data.append(
-                soup_info[1]
-                .select("div:nth-of-type(3)")[0]
-                .get_text()
-                .split()[1]
-                .replace(",", ".")
-            )
-            # Diesel
-            data.append(
-                soup_info[2]
-                .select("div:nth-of-type(3)")[0]
-                .get_text()
-                .split()[1]
-                .replace(",", ".")
-            )
-            # LPG
-            data.append(
-                soup_info[3]
-                .select("div:nth-of-type(3)")[0]
-                .get_text()
-                .split()[1]
-                .replace(",", ".")
-            )
-
+            for count, row in enumerate(soup_info):
+                if count > 0:
+                    data.append(
+                        float(
+                            row.select("div:nth-of-type(3)")[0]
+                            .get_text()
+                            .split()[1]
+                            .replace(",", ".")
+                        )
+                    )
             self.data = data
             self.available = True
-            _LOGGER.debug("Data requested.")
+            _LOGGER.debug(data)
         except requests.exceptions.ConnectionError:
             _LOGGER.error("Connection error")
             self.data = None
