@@ -64,7 +64,41 @@ sensor:
 
 ## Usage
 
-TODO
+Example automation to send a notification when a fuel price changes:
+
+```yaml
+automation:
+  - alias: "Melding bij gewijzigde brandstofprijzen"
+    id: brandstofprijzen_update_notification
+    description: >
+      Send notification when a fuel price changed
+    trigger:
+      - platform: state
+        entity_id:
+          - sensor.adviesprijs_euro95
+          - sensor.adviesprijs_diesel
+          - sensor.adviesprijs_lpg
+          - sensor.adviesprijs_super
+          - sensor.adviesprijs_super_mlv
+          - sensor.adviesprijs_premium_benzines
+          - sensor.adviesprijs_premium_diesels
+          - sensor.adviesprijs_blueone95
+    condition: "{{ trigger.state.to_state != trigger.state.from_state }}"
+    action:
+      - service: notify.robert
+        data:
+          title: Adviesprijs gewijzigd
+          message: >
+            De adviesprijs voor
+            {{ state_attr(trigger.entity_id, 'friendly_name') }}
+            is
+            {% if trigger.state.to_state > trigger.state.from_state %}
+              verhoogd.
+            {% else %}
+              verlaagd.
+            {% endif %}
+    mode: queued
+```
 
 ## Changelog
 
