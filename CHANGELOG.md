@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - Add example automation
+- Add screenshots
 ## [0.2.0] - 2021-02-10
 ### Added
 - Add missing prices. All fuels are available now.

@@ -100,6 +100,9 @@ automation:
     mode: queued
 ```
 
+![](./assets/screenshot-light.png)
+![](./assets/screenshot-dark.png)
+
 ## Changelog
 
 All notable changes to this project will be documented in the [changelog](./CHANGELOG.md).
