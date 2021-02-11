@@ -85,7 +85,7 @@ automation:
           - sensor.adviesprijs_blueone95
     condition: "{{ trigger.state.to_state != trigger.state.from_state }}"
     action:
-      - service: notify.robert
+      - service: notify.notify
         data:
           title: Adviesprijs gewijzigd
           message: >
