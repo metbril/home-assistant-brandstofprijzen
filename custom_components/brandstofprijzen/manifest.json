@@ -7,4 +7,5 @@
     "dependencies": [],
     "codeowners": ["@metbril"],
     "requirements": ["beautifulsoup4==4.9.3"]
+    "iot_class": "cloud_polling"
   }
