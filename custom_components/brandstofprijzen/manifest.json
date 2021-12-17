@@ -6,6 +6,6 @@
     "issue_tracker": "https://github.com/metbril/home-assistant-brandstofprijzen/issues",
     "dependencies": [],
     "codeowners": ["@metbril"],
-    "requirements": ["beautifulsoup4==4.9.3"],
+    "requirements": ["beautifulsoup4==4.10.0"],
     "iot_class": "cloud_polling"
   }

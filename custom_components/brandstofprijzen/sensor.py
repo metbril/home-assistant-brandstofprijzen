@@ -19,7 +19,7 @@ from homeassistant.const import (
 from homeassistant.helpers.entity import Entity
 from homeassistant.util import Throttle
 
-REQUIREMENTS = ["beautifulsoup4==4.9.3"]
+REQUIREMENTS = ["beautifulsoup4==4.10.0"]
 
 _LOGGER = logging.getLogger(__name__)
 _RESOURCE = "https://www.unitedconsumers.com/brandstofprijzen/"
