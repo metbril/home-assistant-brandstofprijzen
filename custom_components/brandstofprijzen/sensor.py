@@ -10,9 +10,9 @@ from homeassistant.components.sensor import PLATFORM_SCHEMA
 from homeassistant.const import (
     ATTR_ATTRIBUTION,
     CONF_ICON,
-    CONF_PREFIX,
-    CONF_NAME,
     CONF_MONITORED_VARIABLES,
+    CONF_NAME,
+    CONF_PREFIX,
     CONF_SCAN_INTERVAL,
     CONF_UNIT_OF_MEASUREMENT,
 )
