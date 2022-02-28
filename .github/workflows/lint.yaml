@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2.3.2
+      - uses: actions/setup-python@v3
       - uses: isort/isort-action@master
       - uses: psf/black@stable
