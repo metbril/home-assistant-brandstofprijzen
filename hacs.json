@@ -3,6 +3,4 @@
     "content_in_root": false,
     "render_readme": true,
     "country": ["NL"],
-    "domains": ["sensor"],
-    "iot_class": ["Assumed State", "Cloud Polling"]
-  }
+}
