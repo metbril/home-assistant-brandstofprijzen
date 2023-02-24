@@ -4,7 +4,7 @@
     "codeowners": ["@metbril"],
     "dependencies": [],
     "documentation": "https://github.com/metbril/home-assistant-brandstofprijzen",
-    "iot_class": "cloud_polling"
+    "iot_class": "cloud_polling",
     "issue_tracker": "https://github.com/metbril/home-assistant-brandstofprijzen/issues",
     "requirements": ["beautifulsoup4==4.10.0"],
     "version": "0.3.0"
