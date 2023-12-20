@@ -6,6 +6,6 @@
     "documentation": "https://github.com/metbril/home-assistant-brandstofprijzen",
     "iot_class": "cloud_polling",
     "issue_tracker": "https://github.com/metbril/home-assistant-brandstofprijzen/issues",
-    "requirements": ["beautifulsoup4==4.10.0"],
+    "requirements": ["beautifulsoup4==4.12.2"],
     "version": "0.3.0"
   }
