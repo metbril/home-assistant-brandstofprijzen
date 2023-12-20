@@ -54,7 +54,6 @@ sensor:
       - super_mlv
       - premium_benzines
       - premium_diesels
-      - blueone95
     icon: mdi:gas-station
     unit_of_measurement: €/L
     prefix: Adviesprijs
@@ -82,7 +81,6 @@ automation:
           - sensor.adviesprijs_super_mlv
           - sensor.adviesprijs_premium_benzines
           - sensor.adviesprijs_premium_diesels
-          - sensor.adviesprijs_blueone95
     condition: "{{ trigger.state.to_state != trigger.state.from_state }}"
     action:
       - service: notify.notify

@@ -46,7 +46,6 @@ SENSOR_TYPES = {
     "super_mlv": ["Super MLV"],
     "premium_benzines": ["Premium benzines"],
     "premium_diesels": ["Premium diesels"],
-    "blueone95": ["BlueOne95"],
 }
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
