@@ -2,7 +2,7 @@
 The Brandstofprijzen integration.
 
 Get fuel prices from United Consumers for Home Assistant
-Copyright (C) 2021, Robert van Bregt <mail@robertvanbregt.nl>
+Copyright (C) 2021-2023, Robert van Bregt <mail@robertvanbregt.nl>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

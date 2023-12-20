@@ -7,9 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## Fixed
+## [0.4.0] - 2023-12-20
+
+### Fixed
 
 - Removed BlueOne95 (except from screenshots)
+
+### Changed
+
+- Updated user agent
+- Updated requirements
 
 ## [0.3.0] - 2021-12-17
 
@@ -51,7 +58,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial release.
 - Added sensors for Euro95, Diesel and LPG prices.
 
-[unreleased]: https://github.com/metbril/home-assistant-brandstofprijzen/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/metbril/home-assistant-brandstofprijzen/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/metbril/home-assistant-brandstofprijzen/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/metbril/home-assistant-brandstofprijzen/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/metbril/home-assistant-brandstofprijzen/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/metbril/home-assistant-brandstofprijzen/compare/v0.1.1...v0.1.2
