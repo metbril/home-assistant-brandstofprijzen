@@ -22,12 +22,11 @@ from homeassistant.util import Throttle
 REQUIREMENTS = ["beautifulsoup4==4.12.2"]
 
 _LOGGER = logging.getLogger(__name__)
-_RESOURCE = "https://www.unitedconsumers.com/brandstofprijzen/"
+_RESOURCE = "https://www.unitedconsumers.com/tanken/brandstofprijzen"
 
-# List: https://www.useragents.me/#most-common-desktop-useragents
-_USERAGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.3"
+_USERAGENT = "UnitedConsumers Brandstofprijzen for Home Assistant"
 
-ATTRIBUTION = "Data provided by United Consumers"
+ATTRIBUTION = "Data provided by UnitedConsumers"
 DEFAULT_ICON = "mdi:gas-station"
 DEFAULT_PREFIX = "Adviesprijs"
 DEFAULT_UNIT_OF_MEASUREMENT = "€/L"
@@ -150,22 +149,24 @@ class BrandstofprijzenData(object):
         try:
             r = requests.get(self._sensor, headers=headers, timeout=10)
             soup = BeautifulSoup(r.text, "html.parser")
-            req_soup = soup.find("div", class_="table")
-            soup_info = req_soup.find_all("div", class_="table-row")
+
+            price_elements = soup.select('span[data-sentry-component="Price"]')
+
             data = []
-            for count, row in enumerate(soup_info):
-                if count > 0:
-                    data.append(
-                        float(
-                            row.select("div:nth-of-type(3)")[0]
-                            .get_text()
-                            .split()[1]
-                            .replace(",", ".")
-                        )
-                    )
+            for idx, el in enumerate(price_elements):
+                text = el.get_text(strip=True)
+                if "€" in text:
+                    try:
+                        value = float(text.replace("€", "").replace(",", ".").strip())
+                        data.append(value)
+                    except ValueError:
+                        _LOGGER.warning(f"Kon geen getal maken van prijs: {text}")
+                else:
+                    _LOGGER.warning(f"[{idx}] Geen euro-teken in tekst: '{text}'")
+
             self.data = data
             self.available = True
-            _LOGGER.debug(data)
+            _LOGGER.debug(f"Geparse prijzen: {data}")
         except requests.exceptions.ConnectionError:
             _LOGGER.error("Connection error")
             self.data = None
