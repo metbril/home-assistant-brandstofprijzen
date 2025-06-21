@@ -4,8 +4,7 @@ name: "Keep workflows alive"
 on:
   schedule:
     # run once a month on the first day of the month at 00:20 UTC
-    # - cron: '20 0 1 * *'
-    - cron: '0/30 * * * *'
+    - cron: '13 0 1 * *'
   workflow_dispatch: {}
 
 jobs:
