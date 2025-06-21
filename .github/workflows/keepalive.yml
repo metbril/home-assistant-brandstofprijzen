@@ -3,18 +3,19 @@ name: "Keep workflows alive"
 # yamllint disable-line rule:truthy
 on:
   schedule:
-    - cron: 22 2 * * *
+    # run once a month on the first day of the month at 00:20 UTC
+    # - cron: '20 0 1 * *'
+    - cron: '0/30 * * * *'
+  workflow_dispatch: {}
 
 jobs:
   keepalive:
     name: Keep workflows alive
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Keep alive
-        uses: gautamkrishnar/keepalive-workflow@master
+      - name: Keep cronjob based triggers of GitHub workflows alive
+        uses: PhrozenByte/gh-workflow-immortality@v1
         with:
-          committer_username: metbril
-          committer_email: metbril@users.noreply.github.com
+          secret: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          repos: ${{ github.repository }}
