@@ -166,7 +166,7 @@ class BrandstofprijzenData(object):
 
             self.data = data
             self.available = True
-            _LOGGER.debug(f"Geparse prijzen: {data}")
+            _LOGGER.debug(f"Geparsed prijzen: {data}")
         except requests.exceptions.ConnectionError:
             _LOGGER.error("Connection error")
             self.data = None
