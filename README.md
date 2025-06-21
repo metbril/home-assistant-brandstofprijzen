@@ -1,8 +1,8 @@
-# United Consumers Brandstofprijzen for Home Assistant
+# UnitedConsumers Brandstofprijzen for Home Assistant
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/metbril/home-assistant-brandstofprijzen/)
 
-Home Assistant component for fuel prices from [United Consumers](https://www.unitedconsumers.com/brandstofprijzen/).
+Home Assistant component for fuel prices from [UnitedConsumers](https://www.unitedconsumers.com/tanken/brandstofprijzen).
 
 ![](./assets/logo.png)
 
