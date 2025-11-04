@@ -16,7 +16,8 @@ from homeassistant.const import (
     CONF_SCAN_INTERVAL,
     CONF_UNIT_OF_MEASUREMENT,
 )
-from homeassistant.helpers.entity import Entity
+
+from homeassistant.components.sensor import SensorEntity
 from homeassistant.util import Throttle
 
 REQUIREMENTS = ["beautifulsoup4==4.13.4"]
@@ -73,8 +74,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
         variables.append(BrandstofprijzenSensor(variable, rest, config))
     add_devices(variables, True)
 
-
-class BrandstofprijzenSensor(Entity):
+class BrandstofprijzenSensor(SensorEntity):
     """Implementing the Brandstofprijzen sensor."""
 
     def __init__(self, sensor_type, rest, config):
@@ -85,51 +85,44 @@ class BrandstofprijzenSensor(Entity):
         self.rest = rest
         self.type = sensor_type
         self._state = None
+        
 
     @property
     def name(self):
-        """Return the name."""
         return self._name
 
     @property
     def icon(self):
-        """Return the icon."""
         return self._icon
 
     @property
     def state(self):
-        """Return the state."""
         return self._state
 
     @property
     def unit_of_measurement(self):
-        """Return the unit of measurement."""
         return self._unit_of_measurement
 
     @property
+    def state_class(self):
+        return "measurement"
+
+    @property
     def extra_state_attributes(self):
-        """Return the state attributes."""
-        attr = {}
-        attr[ATTR_ATTRIBUTION] = ATTRIBUTION
-        return attr
+        return {ATTR_ATTRIBUTION: ATTRIBUTION}
 
     @property
     def available(self):
-        """Could the device be accessed during the last update call."""
         return self.rest.available
 
     def update(self):
-        """Update current date."""
         self.rest.update()
         for idx, stype in enumerate(SENSOR_TYPES):
             if self.type == stype:
                 try:
                     self._state = self.rest.data[idx]
-                    _LOGGER.debug("Updated sensor %s to %.3f", self.type, self._state)
-                except TypeError:
+                except (TypeError, IndexError):
                     self._state = None
-                    _LOGGER.error("Unable to update %s", self.type)
-
 
 class BrandstofprijzenData(object):
     """Get data from site."""
