@@ -7,6 +7,7 @@ import homeassistant.helpers.config_validation as cv
 import requests
 import voluptuous as vol
 from homeassistant.components.sensor import PLATFORM_SCHEMA
+from homeassistant.components.sensor import SensorEntity
 from homeassistant.const import (
     ATTR_ATTRIBUTION,
     CONF_ICON,
@@ -16,8 +17,6 @@ from homeassistant.const import (
     CONF_SCAN_INTERVAL,
     CONF_UNIT_OF_MEASUREMENT,
 )
-
-from homeassistant.components.sensor import SensorEntity
 from homeassistant.util import Throttle
 
 REQUIREMENTS = ["beautifulsoup4==4.13.4"]
@@ -89,22 +88,27 @@ class BrandstofprijzenSensor(SensorEntity):
 
     @property
     def name(self):
+        """Return the name."""
         return self._name
 
     @property
     def icon(self):
+        """Return the icon."""
         return self._icon
 
     @property
     def state(self):
+        """Return the state."""
         return self._state
 
     @property
     def unit_of_measurement(self):
+        """Return the unit of measurement."""
         return self._unit_of_measurement
 
     @property
     def state_class(self):
+        """Return the state class."""
         return "measurement"
 
     @property
@@ -121,6 +125,7 @@ class BrandstofprijzenSensor(SensorEntity):
             if self.type == stype:
                 try:
                     self._state = self.rest.data[idx]
+                    _LOGGER.debug("Updated sensor %s to %.3f", self.type, self._state)
                 except (TypeError, IndexError):
                     self._state = None
 
