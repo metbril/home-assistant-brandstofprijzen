@@ -77,7 +77,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     add_devices(variables, True)
 
 
-class BrandstofprijzenSensor(Entity):
+class BrandstofprijzenSensor(SensorEntity):
     """Implementing the Brandstofprijzen sensor."""
 
     def __init__(self, sensor_type, rest, config):
