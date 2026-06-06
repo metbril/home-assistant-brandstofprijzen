@@ -7,8 +7,8 @@ import homeassistant.helpers.config_validation as cv
 import requests
 import voluptuous as vol
 from homeassistant.components.sensor import (
-    PLATFORM_SCHEMA, 
-    SensorEntity, 
+    PLATFORM_SCHEMA,
+    SensorEntity,
     SensorStateClass,
 )
 from homeassistant.const import (
