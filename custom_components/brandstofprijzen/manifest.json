@@ -1,11 +1,15 @@
 {
-    "domain": "brandstofprijzen",
-    "name": "Brandstofprijzen",
-    "codeowners": ["@metbril"],
-    "dependencies": [],
-    "documentation": "https://github.com/metbril/home-assistant-brandstofprijzen",
-    "iot_class": "cloud_polling",
-    "issue_tracker": "https://github.com/metbril/home-assistant-brandstofprijzen/issues",
-    "requirements": ["beautifulsoup4==4.14.3"],
-    "version": "0.5.1"
-  }
+  "domain": "brandstofprijzen",
+  "name": "Brandstofprijzen",
+  "codeowners": [
+    "@metbril"
+  ],
+  "dependencies": [],
+  "documentation": "https://github.com/metbril/home-assistant-brandstofprijzen",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/metbril/home-assistant-brandstofprijzen/issues",
+  "requirements": [
+    "beautifulsoup4==4.14.4"
+  ],
+  "version": "0.5.1"
+}
