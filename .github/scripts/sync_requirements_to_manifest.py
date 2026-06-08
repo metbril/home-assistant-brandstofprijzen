@@ -9,6 +9,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 REQ_FILE = REPO_ROOT / "requirements.txt"
 MANIFEST_FILE = REPO_ROOT / "custom_components" / "brandstofprijzen" / "manifest.json"
 
+
 def parse_requirements(path):
     reqs = []
     if not path.exists():
@@ -25,19 +26,23 @@ def parse_requirements(path):
         reqs.append(f"{name}=={ver}" if ver else name)
     return reqs
 
+
 def load_manifest(path):
     if not path.exists():
         print(f"Manifest not found at {path}", file=sys.stderr)
         sys.exit(1)
     return json.loads(path.read_text())
 
+
 def write_manifest(path, data):
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+
 
 def git_commit_and_push(files, message):
     subprocess.check_call(["git", "add"] + files)
     subprocess.check_call(["git", "commit", "-m", message])
     subprocess.check_call(["git", "push"])
+
 
 def main():
     reqs = parse_requirements(REQ_FILE)
@@ -54,10 +59,14 @@ def main():
 
     # Commit changes (optional: restrict to dependabot actor in CI)
     try:
-        git_commit_and_push([str(MANIFEST_FILE.relative_to(REPO_ROOT))], "Sync manifest.json requirements from requirements.txt")
+        git_commit_and_push(
+            [str(MANIFEST_FILE.relative_to(REPO_ROOT))],
+            "Sync manifest.json requirements from requirements.txt",
+        )
     except subprocess.CalledProcessError as e:
         print("Git commit/push failed:", e, file=sys.stderr)
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
