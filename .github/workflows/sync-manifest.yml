@@ -1,0 +1,29 @@
+name: Sync manifest requirements
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+      - name: Run sync script
+        run: |
+          python .github/scripts/sync_requirements_to_manifest.py
+      - name: Create follow-up commit (if any)
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "Sync manifest.json requirements from requirements.txt"
+          file_pattern: "custom_components/brandstofprijzen/manifest.json"
