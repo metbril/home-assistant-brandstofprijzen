@@ -6,17 +6,19 @@ from datetime import datetime, timedelta
 import homeassistant.helpers.config_validation as cv
 import requests
 import voluptuous as vol
-from homeassistant.components.sensor import PLATFORM_SCHEMA
+from homeassistant.components.sensor import (
+    PLATFORM_SCHEMA,
+    SensorEntity,
+    SensorStateClass,
+)
 from homeassistant.const import (
     ATTR_ATTRIBUTION,
     CONF_ICON,
     CONF_MONITORED_VARIABLES,
-    CONF_NAME,
     CONF_PREFIX,
     CONF_SCAN_INTERVAL,
     CONF_UNIT_OF_MEASUREMENT,
 )
-from homeassistant.helpers.entity import Entity
 from homeassistant.util import Throttle
 
 _LOGGER = logging.getLogger(__name__)
@@ -25,12 +27,13 @@ _RESOURCE = "https://www.unitedconsumers.com/tanken/brandstofprijzen"
 _USERAGENT = "UnitedConsumers Brandstofprijzen for Home Assistant"
 
 ATTRIBUTION = "Data provided by UnitedConsumers"
+
 DEFAULT_ICON = "mdi:gas-station"
 DEFAULT_PREFIX = "Adviesprijs"
-DEFAULT_UNIT_OF_MEASUREMENT = "€/L"
-
 # Prevent hammering the webpage, prices usually change once a day
 DEFAULT_SCAN_INTERVAL = timedelta(hours=1)
+DEFAULT_UNIT_OF_MEASUREMENT = "€/L"
+
 # Prevent fetching the page again for each sensor
 MIN_TIME_BETWEEN_UPDATES = timedelta(minutes=1)
 
@@ -47,15 +50,15 @@ SENSOR_TYPES = {
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
+        vol.Optional(CONF_ICON, default=DEFAULT_ICON): cv.string,
         vol.Optional(CONF_MONITORED_VARIABLES, default=list(SENSOR_TYPES)): vol.All(
             cv.ensure_list, [vol.In(SENSOR_TYPES)]
         ),
-        vol.Optional(CONF_ICON, default=DEFAULT_ICON): cv.string,
+        vol.Optional(CONF_PREFIX, default=DEFAULT_PREFIX): cv.string,
+        vol.Optional(CONF_SCAN_INTERVAL, default=DEFAULT_SCAN_INTERVAL): cv.time_period,
         vol.Optional(
             CONF_UNIT_OF_MEASUREMENT, default=DEFAULT_UNIT_OF_MEASUREMENT
         ): cv.string,
-        vol.Optional(CONF_PREFIX, default=DEFAULT_PREFIX): cv.string,
-        vol.Optional(CONF_SCAN_INTERVAL, default=DEFAULT_SCAN_INTERVAL): cv.time_period,
     }
 )
 
@@ -72,7 +75,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     add_devices(variables, True)
 
 
-class BrandstofprijzenSensor(Entity):
+class BrandstofprijzenSensor(SensorEntity):
     """Implementing the Brandstofprijzen sensor."""
 
     def __init__(self, sensor_type, rest, config):
@@ -105,11 +108,14 @@ class BrandstofprijzenSensor(Entity):
         return self._unit_of_measurement
 
     @property
+    def state_class(self) -> str | None:
+        """Return the state class."""
+        return SensorStateClass.MEASUREMENT
+
+    @property
     def extra_state_attributes(self):
         """Return the state attributes."""
-        attr = {}
-        attr[ATTR_ATTRIBUTION] = ATTRIBUTION
-        return attr
+        return {ATTR_ATTRIBUTION: ATTRIBUTION}
 
     @property
     def available(self):
@@ -124,7 +130,7 @@ class BrandstofprijzenSensor(Entity):
                 try:
                     self._state = self.rest.data[idx]
                     _LOGGER.debug("Updated sensor %s to %.3f", self.type, self._state)
-                except TypeError:
+                except (TypeError, IndexError):
                     self._state = None
                     _LOGGER.error("Unable to update %s", self.type)
 
