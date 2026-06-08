@@ -21,8 +21,6 @@ from homeassistant.const import (
 )
 from homeassistant.util import Throttle
 
-REQUIREMENTS = ["beautifulsoup4==4.13.4"]
-
 _LOGGER = logging.getLogger(__name__)
 _RESOURCE = "https://www.unitedconsumers.com/tanken/brandstofprijzen"
 
