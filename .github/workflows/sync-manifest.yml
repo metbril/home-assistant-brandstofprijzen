@@ -20,6 +20,9 @@ jobs:
         with:
           python-version: "3.x"
       - name: Run sync script
+        env:
+          COMMIT_NAME: ${{ secrets.COMMIT_NAME }}
+          COMMIT_EMAIL: ${{ secrets.COMMIT_EMAIL }}
         run: |
           python .github/scripts/sync_requirements_to_manifest.py
       - name: Create follow-up commit (if any)

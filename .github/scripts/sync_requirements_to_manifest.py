@@ -57,6 +57,18 @@ def main():
     write_manifest(MANIFEST_FILE, manifest)
     print("Updated manifest requirements to:", reqs)
 
+    # Read from environment (set these in the GitHub Action step)
+    message = os.getenv("COMMIT_MESSAGE", "Automated commit from workflow")
+    name = os.getenv("COMMIT_NAME", "github-actions[bot]")
+    email = os.getenv("COMMIT_EMAIL", "actions@github.com")
+
+    # Prepare env for subprocess (works on Windows and Unix)
+    env = os.environ.copy()
+    env["GIT_AUTHOR_NAME"] = name
+    env["GIT_AUTHOR_EMAIL"] = email
+    env["GIT_COMMITTER_NAME"] = name
+    env["GIT_COMMITTER_EMAIL"] = email
+
     # Commit changes (optional: restrict to dependabot actor in CI)
     try:
         git_commit_and_push(
